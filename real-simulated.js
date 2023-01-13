@@ -1,10 +1,5 @@
 
 // A script that generates realistic sensor data for a solar panel:
-/*
-* This script retrieves weather data (temperature, solar radiation, wind speed) from a weather API, a
-* nd uses mathematical models to calculate the current power and energy production based on 
-* the weather conditions. The timestamp will be the current time when the script is executed. 
-*/
 
 // Function to generate solar panel data
   function generateSolarData() {
@@ -37,6 +32,9 @@
   
   // Function to retrieve current weather data
   function getWeatherData() {
+
+
+
     // Make a request to a weather API to get current weather data
     var weatherData = {
       temperature: Math.random() * (35 - 10) + 10,
@@ -59,5 +57,55 @@
     var energyProduction = currentPower * 0.2;
     return energyProduction;
   }
-  
-module.exports = generateSolarData
+
+  // Function to generate solar panel sensor data
+function generateSolarPanelData() {
+  // Get current time and date
+  let timestamp = new Date().toISOString();
+
+  // Generate random values for solar panel parameters
+  let energyProduction = (Math.random() * 12).toFixed(2);
+  let powerOutput = (Math.random() * 300).toFixed(2);
+  let voltage = (Math.random() * 100).toFixed(2);
+  let current = (Math.random() * 15).toFixed(2);
+  let temperature = (Math.random() * 50).toFixed(2);
+  let solarRadiation = (Math.random() * 1000).toFixed(2);
+
+  // Create an object with the generated sensor data
+  let data = {
+      "timestamp":timestamp,
+      "energyProduction": {
+          "total": energyProduction,
+          "units": "kWh"
+      },
+      "powerOutput": {
+          "current": powerOutput,
+          "units": "W"
+      },
+      "voltageCurrent": {
+          "voltage":voltage,
+          "current":current,
+          "units": {
+              "voltage": "V",
+              "current": "A"
+          }
+      },
+      "temperature": {
+          "panel": temperature,
+          "units": "Celsius"
+      },
+      "solarRadiation": {
+          "value": solarRadiation,
+          "units": "W/m^2"
+      },
+      
+  };
+  return data;
+}
+
+// Generate and log the solar panel data
+console.log(generateSolarPanelData());
+
+
+
+module.exports = generateSolarPanelData

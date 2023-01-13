@@ -1,6 +1,6 @@
 //jshint esversion:6
 
-const generateSolarData = require("./real-simulated.js");
+const generateSolarPanelData = require("./real-simulated.js");
 //import { generateSolarData } from "./real-simulated";
 const express = require("express");
 //import express from "express";
@@ -22,8 +22,8 @@ admin.initializeApp({
 const db = admin.firestore();
 
 
-
-app.route("/api/production/all")
+//get all energy production data from the database
+app.route("/api/production")
 
 .get(function(req, res){
   console.log('get is working');
@@ -46,10 +46,11 @@ energyRef.get()
 
 .post( async (req, res) => {
   
-  for(let i = 0; i<10; i++){
+  
     const randomNumID = Math.floor(Math.random() * 1000000000);
-    const solarData =  generateSolarData();
-    
+    const solarData =  generateSolarPanelData();
+  
+
     try {
       await db.collection('produced-energy').doc(`${randomNumID}`).set(solarData);
       res.status(200).send({ message: 'Data written successfully' });
@@ -57,7 +58,8 @@ energyRef.get()
       console.log(error);
       res.status(500).send({ message: 'Error writing data', error });
     }
-  }
+
+  
 
  
 });
@@ -65,4 +67,5 @@ energyRef.get()
 app.listen(3000, function() {
   console.log("Server started on port 3000");
 });
+
 
