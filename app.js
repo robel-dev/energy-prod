@@ -23,18 +23,7 @@ const db = admin.firestore();
 
 
 
-
-// db.collection('users').doc('johndoe').set(data)
-//   .then(() => {
-//     console.log('Data written successfully');
-//   })
-//   .catch((error) => {
-//     console.error('Error writing data: ', error);
-//   });
-
-
-
-app.route("/all")
+app.route("/api/production/all")
 
 .get(function(req, res){
   console.log('get is working');
@@ -77,19 +66,3 @@ app.listen(3000, function() {
   console.log("Server started on port 3000");
 });
 
-/*
-////////////////////////////////Requests Targetting A Specific Article////////////////////////
-
-app.route("/articles/:articleTitle")
-
-.get(function(req, res){
-
-  Article.findOne({title: req.params.articleTitle}, function(err, foundArticle){
-    if (foundArticle) {
-      res.send(foundArticle);
-    } else {
-      res.send("No articles matching that title was found.");
-    }
-  });
-})
- */
